@@ -1,40 +1,40 @@
-import "./index.css";
-import { useState, useEffect } from "react";
-import Blog from "./components/Blog";
-import blogService from "./services/blogs";
-import loginService from "./services/login";
-import Notification from "./components/Notification";
+import "./index.css"
+import { useState, useEffect } from "react"
+import Blog from "./components/Blog"
+import blogService from "./services/blogs"
+import loginService from "./services/login"
+import Notification from "./components/Notification"
 
 const App = () => {
-  const [blogs, setBlogs] = useState([]);
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [url, setUrl] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [user, setUser] = useState(null);
+  const [blogs, setBlogs] = useState([])
+  const [title, setTitle] = useState("")
+  const [author, setAuthor] = useState("")
+  const [url, setUrl] = useState("")
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [user, setUser] = useState(null)
 
-  const [notification, setNotification] = useState(null);
-
-  useEffect(() => {
-    blogService.getAll().then((blogs) => setBlogs(blogs));
-  }, []);
+  const [notification, setNotification] = useState(null)
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem("loggedBlogappUser");
+    blogService.getAll().then((blogs) => setBlogs(blogs))
+  }, [])
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem("loggedBlogappUser")
     if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
-      setUser(user);
-      blogService.setToken(user.token);
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      blogService.setToken(user.token)
     }
-  }, []);
+  }, [])
 
   const handleLogin = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     try {
-      const user = await loginService.login({ username, password });
-      window.localStorage.setItem("loggedBlogappUser", JSON.stringify(user));
-      blogService.setToken(user.token);
+      const user = await loginService.login({ username, password })
+      window.localStorage.setItem("loggedBlogappUser", JSON.stringify(user))
+      blogService.setToken(user.token)
       setUser(user)
       setUsername("")
       setPassword("")
@@ -47,11 +47,11 @@ const App = () => {
         setNotification(null)
       }, 7000) 
     }
-  };
+  }
 
   const loginForm = () => (
     <div className="m-5">
-      <h2 className="text-3xl font-bold mb-4 uppercase text-blue-500">
+      <h2 className="text-3xl font-bold mb-4 uppercase text-blue-500 text-center">
         login in to application
       </h2>
       <Notification notification={notification} />
@@ -63,7 +63,7 @@ const App = () => {
             placeholder="..."
             onChange={({ target }) => setUsername(target.value)}
             value={username}
-            class="px-4 py-2 w-96 
+            class="px-4 py-2 w-full 
             border border-slate-600 placeholder-transparent"
           />
           <label
@@ -84,7 +84,7 @@ const App = () => {
             id="password"
             value={password}
             onChange={({ target }) => setPassword(target.value)}
-            class="px-4 py-2 w-96 
+            class="px-4 py-2 w-full 
             border border-slate-600 placeholder-transparent"
           />
           <label
@@ -99,25 +99,25 @@ const App = () => {
           </label>
         </div>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded p-10 uppercase"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded p-10 uppercase w-full"
           type="submit"
         >
           login
         </button>
       </form>
     </div>
-  );
+  )
 
   const addBlog = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     try {
       const blogObject = {
         title,
         author,
         url,
-      };
-      const savedBlog = await blogService.create(blogObject);
-      setBlogs(blogs.concat(savedBlog));
+      }
+      const savedBlog = await blogService.create(blogObject)
+      setBlogs(blogs.concat(savedBlog))
       setTitle("")
       setAuthor("")
       setUrl("")
@@ -134,20 +134,19 @@ const App = () => {
         setUrl("")
       }, 7000) 
     }
-  };
+  }
 
   const handleLogout = () => {
     window.localStorage.removeItem("loggedBlogappUser")
     blogService.setToken(null)
     setUser(null)
-  };
+  }
 
-  const noteForm = () => (
+  const blogForm = () => (
     <div className="m-5">
-      <h2 className="text-3xl font-bold mb-4 uppercase text-blue-500">blogs</h2>
+      <h2 className="text-3xl font-bold mb-4 uppercase text-blue-500 text-center">blogs</h2>
       <Notification notification={notification} />
-
-      {user && `${user.name} logged in`}
+      <span className="p-2">{user && `${user.name} logged in`}</span>
       <button
         className="ml-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded p-10 uppercase"
         onClick={handleLogout}
@@ -166,7 +165,7 @@ const App = () => {
             placeholder="..."
             onChange={({ target }) => setTitle(target.value)}
             value={title}
-            class="px-4 py-2 w-96 
+            class="px-4 py-2 w-full 
             border border-slate-600 placeholder-transparent"
           />
           <label
@@ -187,7 +186,7 @@ const App = () => {
             placeholder="..."
             onChange={({ target }) => setAuthor(target.value)}
             value={author}
-            class="px-4 py-2 w-96 
+            class="px-4 py-2 w-full 
             border border-slate-600 placeholder-transparent"
           />
           <label
@@ -209,7 +208,7 @@ const App = () => {
             placeholder="..."
             onChange={({ target }) => setUrl(target.value)}
             value={url}
-            class="px-4 py-2 w-96 
+            class="px-4 py-2 w-full 
             border border-slate-600 placeholder-transparent"
           />
           <label
@@ -225,7 +224,7 @@ const App = () => {
         </div>
 
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded p-10 uppercase"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded p-10 uppercase w-full"
           type="submit"
         >
           create
@@ -240,8 +239,9 @@ const App = () => {
         </ul>
       </div>
     </div>
-  );
+  )
 
-  return user === null ? loginForm() : noteForm();
-};
-export default App;
+  return !user ? loginForm() : blogForm()
+
+}
+export default App
