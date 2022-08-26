@@ -1,14 +1,16 @@
-import React, { useState } from "react"
-const BlogForm = ({ createBlog}) => {
-  const [title, setTitle] = useState("")
-  const [author, setAuthor] = useState("")
-  const [url, setUrl] = useState("")
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+
+const BlogForm = ({ createBlog }) => {
+  const [title, setTitle] = useState('')
+  const [author, setAuthor] = useState('')
+  const [url, setUrl] = useState('')
   const addBlog = (event) => {
     event.preventDefault()
-    createBlog({title,author,url})
-    setTitle("")
-    setAuthor("")
-    setUrl("")
+    createBlog({ title,author,url })
+    setTitle('')
+    setAuthor('')
+    setUrl('')
   }
 
   const labelStyle = 'ml-4 -mt-10 text-xs text-blue-400 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:-mt-8 peer-placeholder-shown:text-base duration-300 uppercase'
@@ -23,7 +25,6 @@ const BlogForm = ({ createBlog}) => {
           <input
             type="text"
             id="title"
-            placeholder="..."
             onChange={({ target }) => setTitle(target.value)}
             value={title}
             className={inputStyle}
@@ -56,5 +57,9 @@ const BlogForm = ({ createBlog}) => {
       </form>
     </div>
   )
+}
+
+BlogForm.propTypes = {
+  createBlog: PropTypes.func
 }
 export default BlogForm

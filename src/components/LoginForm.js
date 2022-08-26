@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 const LoginForm = ({
   handleSubmit,
   handleUsernameChange,
@@ -15,9 +17,9 @@ const LoginForm = ({
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col items-start mb-9">
           <input type="text" id="username"
-              onChange={handleUsernameChange}
-              value={username}
-              className={inputStyle}
+            onChange={handleUsernameChange}
+            value={username}
+            className={inputStyle}
           />
           <label htmlFor="username" className={labelStyle}>username</label>
         </div>
@@ -35,4 +37,11 @@ const LoginForm = ({
   )
 }
 
-export default LoginForm;
+LoginForm.propTypes = {
+  handleSubmit: PropTypes.func,
+  handleUsernameChange: PropTypes.func,
+  handlePasswordChange: PropTypes.func,
+  username: PropTypes.string,
+  password: PropTypes.string
+}
+export default LoginForm

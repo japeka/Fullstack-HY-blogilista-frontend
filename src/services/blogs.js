@@ -8,7 +8,7 @@ const setToken = newToken => {
     token = null
   } else {
     token = `bearer ${newToken}`
-  } 
+  }
 }
 
 const getAll = () => {
@@ -49,12 +49,10 @@ const remove = async (id) => {
   return response.data
 }
 
-
-// eslint-disable-next-line import/no-anonymous-default-export
-export default { 
+export default {
   getAll,
   create,
   update,
   remove,
-  setToken 
+  setToken
 }
