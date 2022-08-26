@@ -27,9 +27,34 @@ const create = async newObject => {
   return response.data
 }
 
+const update = async (id, blogObject ) => {
+  const headers = {
+    'Authorization': token,
+    'Content-Type': 'application/json',
+  }
+  const response = await axios.put(`${baseUrl}/${id}`, blogObject, {
+    headers: headers
+  })
+  return response.data
+}
+
+const remove = async (id) => {
+  const headers = {
+    'Authorization': token,
+    'Content-Type': 'application/json',
+  }
+  const response = await axios.delete(`${baseUrl}/${id}`, {
+    headers: headers
+  })
+  return response.data
+}
+
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default { 
   getAll,
   create,
+  update,
+  remove,
   setToken 
 }
