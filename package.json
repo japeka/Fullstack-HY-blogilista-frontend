@@ -6,7 +6,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "eslint": "eslint ."
+    "eslint": "eslint .",
+    "cypress:open": "cypress open"
   },
   "author": "jk",
   "eslintConfig": {
@@ -41,6 +42,8 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^14.4.3",
     "autoprefixer": "^10.4.8",
+    "cypress": "^10.6.0",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-jest": "^26.8.7",
     "jest-watch-typeahead": "^0.6.5",
     "postcss": "^8.4.16",

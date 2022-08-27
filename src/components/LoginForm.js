@@ -31,7 +31,7 @@ const LoginForm = ({
           />
           <label htmlFor="password" className={labelStyle}>password</label>
         </div>
-        <button className={buttonStyle} type="submit">login</button>
+        <button className={buttonStyle} id="login-button" type="submit">login</button>
       </form>
     </div>
   )

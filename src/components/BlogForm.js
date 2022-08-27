@@ -24,6 +24,7 @@ const BlogForm = ({ createBlog }) => {
         <div className="flex flex-col items-start mb-9">
           <input
             type="text"
+            id = "blogTitle"
             onChange={({ target }) => setTitle(target.value)}
             value={title}
             className={'title ' + inputStyle}
@@ -34,6 +35,7 @@ const BlogForm = ({ createBlog }) => {
         <div className="flex flex-col items-start mb-9">
           <input
             type="text"
+            id = "blogAuthor"
             onChange={({ target }) => setAuthor(target.value)}
             value={author}
             className={'author ' + inputStyle}
@@ -44,13 +46,14 @@ const BlogForm = ({ createBlog }) => {
         <div className="flex flex-col items-start mb-9">
           <input
             type="text"
+            id = "blogUrl"
             onChange={({ target }) => setUrl(target.value)}
             value={url}
             className={'url ' + inputStyle}
           />
           <label htmlFor="url" className={labelStyle}>url</label>
         </div>
-        <button className={buttonStyle} type="submit">create</button>
+        <button id="blogCreate" className={buttonStyle} type="submit">create</button>
       </form>
     </div>
   )

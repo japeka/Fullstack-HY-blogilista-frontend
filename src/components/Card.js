@@ -22,10 +22,10 @@ const Card = ({ blog, likes,remove }) => {
   return blog.title && (
     <div className="card w-full bg-orange-120 p-5">
       <p className={'url ' + textStyle}>URL: {blog.url}</p>
-      <p className={'likes ' + textStyle}># {blog.likes}
-        <button onClick={addLike} className={buttonStyle}>likes</button>
+      <p className={'likes ' + textStyle}>{'# '}<span className="countLikes">{blog.likes}</span>
+        <button onClick={addLike} className={'blogLikes ' + buttonStyle}>likes</button>
       </p>
-      <button onClick={deleteBlog} className={buttonStyle}>remove</button>
+      <button id="blogRemove" onClick={deleteBlog} className={buttonStyle}>remove</button>
     </div>
   )}
 
