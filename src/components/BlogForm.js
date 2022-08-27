@@ -15,7 +15,7 @@ const BlogForm = ({ createBlog }) => {
 
   const labelStyle = 'ml-4 -mt-10 text-xs text-blue-400 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:-mt-8 peer-placeholder-shown:text-base duration-300 uppercase'
   const inputStyle = 'px-4 py-2 w-full border border-slate-600 placeholder-transparent'
-  const buttonStyle = 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded p-10 uppercase w-full'
+  const buttonStyle = 'create-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded p-10 uppercase w-full'
 
   return (
     <div>
@@ -24,10 +24,9 @@ const BlogForm = ({ createBlog }) => {
         <div className="flex flex-col items-start mb-9">
           <input
             type="text"
-            id="title"
             onChange={({ target }) => setTitle(target.value)}
             value={title}
-            className={inputStyle}
+            className={'title ' + inputStyle}
           />
           <label htmlFor="title" className={labelStyle}>title</label>
         </div>
@@ -35,10 +34,9 @@ const BlogForm = ({ createBlog }) => {
         <div className="flex flex-col items-start mb-9">
           <input
             type="text"
-            id="author"
             onChange={({ target }) => setAuthor(target.value)}
             value={author}
-            className={inputStyle}
+            className={'author ' + inputStyle}
           />
           <label htmlFor="author" className={labelStyle}>author</label>
         </div>
@@ -46,10 +44,9 @@ const BlogForm = ({ createBlog }) => {
         <div className="flex flex-col items-start mb-9">
           <input
             type="text"
-            id="url"
             onChange={({ target }) => setUrl(target.value)}
             value={url}
-            className={inputStyle}
+            className={'url ' + inputStyle}
           />
           <label htmlFor="url" className={labelStyle}>url</label>
         </div>
@@ -60,6 +57,6 @@ const BlogForm = ({ createBlog }) => {
 }
 
 BlogForm.propTypes = {
-  createBlog: PropTypes.func
+  createBlog: PropTypes.func.isRequired
 }
 export default BlogForm

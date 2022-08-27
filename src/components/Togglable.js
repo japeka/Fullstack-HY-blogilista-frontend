@@ -33,7 +33,7 @@ const Togglable = forwardRef((props, ref) => {
 Togglable.displayName = 'Togglable'
 
 Togglable.propTypes = {
-  forwardRef: PropTypes.func
+  forwardRef: PropTypes.func.isRequired
 }
 
 export default Togglable
