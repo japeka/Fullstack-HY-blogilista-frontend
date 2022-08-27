@@ -113,7 +113,7 @@ describe('Blog app', function () {
               cy.request('POST', 'http://localhost:3003/api/users/', user)
             })
 
-            it('another user logs in and tries to remove blogs created by another person', function () {
+            it('another user logs in and tries to remove blog created by another person', function () {
               cy.login({ username: 'hannav', password: 'salainen' })
               cy.contains('helloworld blog1')
                 .parent()
@@ -127,7 +127,7 @@ describe('Blog app', function () {
               )
             })
           })
-          describe('figure correct order of blogs by their, do some resets first, adding blogs with 0 likes', function () {
+          describe('figure out correct order of blogs by their likes #, do some resets first, addin initial blogs', function () {
             beforeEach(function () {
               cy.request('POST', 'http://localhost:3003/api/testing/reset')
               cy.logout()
@@ -152,7 +152,8 @@ describe('Blog app', function () {
               })
             })
 
-            it('add likes to blog (0 to 1st blog, 1 to 2nd blog), check that blog with 1 likes is preceding the blog with 0 likes', function () {
+            it('add likes to blog1 (0likes) blog2 (1likes), verify that blog with 1 likes is preceding the blog with 0 likes', function () {
+              //add likes using interface
               cy.contains('helloworld blog1')
                 .parent()
                 .find('button')
@@ -184,15 +185,17 @@ describe('Blog app', function () {
                 .find('p.likes')
                 .contains('# 1')
 
+              //all the important data's residing countLikes element, only 2 elements  
               cy.get('span.countLikes')
                 .eq(0)
-                .invoke('text')
-                .then((num0) => {
+                .invoke('text') 
+                .then((num0) => { // get count of 1st blog's likes
                   const firsLikes = Number(num0)
                   cy.get('span.countLikes')
                     .eq(1)
                     .invoke('text')
-                    .then((secondLikes) => {
+                    .then((secondLikes) => { //get count of 2nd blog's likes
+                      //likes of 1st blog should be greater or equal to one last in the list
                       cy.wrap(firsLikes).should('be.gte', Number(secondLikes))
                     })
                 })
