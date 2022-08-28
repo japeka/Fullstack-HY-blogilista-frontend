@@ -127,7 +127,7 @@ describe('Blog app', function () {
               )
             })
           })
-          describe('figure out correct order of blogs by their likes #, do some resets first, addin initial blogs', function () {
+          describe('figure out correct order of blogs by their likes #, do some resets first, adding initial blogs', function () {
             beforeEach(function () {
               cy.request('POST', 'http://localhost:3003/api/testing/reset')
               cy.logout()
@@ -142,61 +142,42 @@ describe('Blog app', function () {
                 title: 'helloworld blog1',
                 author: 'maria heino',
                 url: 'http://maria.heino.fi',
-                likes: 0,
+                likes: Math.floor(Math.random()*20),
               })
               cy.createBlog({
                 title: 'helloworld blog2',
                 author: 'maria heino',
                 url: 'http://maria.heino.fi',
-                likes: 0,
+                likes: Math.floor(Math.random()*20),
               })
             })
 
-            it('add likes to blog1 (0likes) blog2 (1likes), verify that blog with 1 likes is preceding the blog with 0 likes', function () {
-              //add likes using interface
+            it('verify that blog with most likes predeces the blog with less likes', function () {
               cy.contains('helloworld blog1')
                 .parent()
                 .find('button')
                 .as('theButton1')
               cy.get('@theButton1').click()
+
               cy.contains('helloworld blog2')
                 .parent()
                 .find('button')
                 .as('theButton2')
               cy.get('@theButton2').click()
-              cy.contains('helloworld blog2')
-                .parent()
-                .parent()
-                .find('button.blogLikes')
-                .click()
-              cy.contains('helloworld blog2')
-                .parent()
-                .parent()
-                .find('p.likes')
-                .contains('# 0')
-              cy.contains('helloworld blog2')
-                .parent()
-                .parent()
-                .find('button.blogLikes')
-                .click()
-              cy.contains('helloworld blog2')
-                .parent()
-                .parent()
-                .find('p.likes')
-                .contains('# 1')
 
-              //all the important data's residing countLikes element, only 2 elements  
+
+              //countLikes span element has the likes count
               cy.get('span.countLikes')
                 .eq(0)
-                .invoke('text') 
+                .invoke('text')
                 .then((num0) => { // get count of 1st blog's likes
-                  const firsLikes = Number(num0)
+                  const firstLikes = Number(num0)
                   cy.get('span.countLikes')
                     .eq(1)
                     .invoke('text')
                     .then((secondLikes) => { //get count of 2nd blog's likes
                       //likes of 1st blog should be greater or equal to one last in the list
-                      cy.wrap(firsLikes).should('be.gte', Number(secondLikes))
+                      cy.wrap(firstLikes).should('be.gte', Number(secondLikes))
                     })
                 })
             })
